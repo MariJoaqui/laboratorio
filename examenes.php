@@ -27,6 +27,7 @@
             <ul class="right hide-on-med-and-down">
                 <li><a href="index.php">Inicio</a></li>
                 <li><a href="examenes.php">Examenes</a></li>
+                <li><a href="pacientes.php">pacientes</a></li>
                 <li><a href="resultados.php">Resultados</a></li>
             </ul>
         </div>
@@ -35,6 +36,7 @@
     <ul class="sidenav" id="menu-responsive">
         <li><a href="index.php">Inicio</a></li>
         <li><a href="examenes.php">Examenes</a></li>
+        <li><a href="pacientes.php">pacientes</a></li>
         <li><a href="resultados.php">Resultados</a></li>
     </ul>
 
@@ -56,22 +58,50 @@
 
     <div class="container">
         <div class="row">
-            <form class="col s12" action="agregandoDatos.php" method="post">
+            <form class="col s12" action="proceso.php" method="post">
                 <div class="row">
                     <div class="input-field col s6">
                         <input id="input_text" type="text" data-length="10" name="nombrePaciente" required>
-                        <label class="light-blue-text text-darken-4" for="input_text">Nombre y apellido:</label>
+                        <label class="pink-text text-lighten-2" for="input_text">Nombre y apellido:</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="input_text" type="text" data-length="10" name="fecha" required>
-                        <label class="light-blue-text text-darken-4" for="input_text">Fecha:</label>
+                        <input id="input_text" type="text" data-length="10" name="edad" required>
+                        <label class="pink-text text-lighten-2" for="input_text">Edad:</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="input_text" type="text" data-length="10" name="cedula" required>
+                        <label class="pink-text text-lighten-2" for="input_text">Cédula:</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="input_text" type="text" data-length="10" name="telefono" required>
+                        <label class="pink-text text-lighten-2" for="input_text">Número de teléfono:</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="input_text" type="email" data-length="10" name="correo" required>
+                        <label class="pink-text text-lighten-2" for="input_text">Correo electrónico:</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="textarea2" class="materialize-textarea" data-length="120" name="direccion"></textarea>
+                        <label class="pink-text text-lighten-2" for="textarea2">Dirección de habitación</label>
                     </div>
                 </div>
                 
-                <button class="btn waves-effect waves-light light-blue darken-4" type="submit" name="action" value="si">Agregar</button>
+                <button class="btn waves-effect waves-light pink lighten-2" type="submit" name="action" value="si">Procesar solicitud</button>
             </form>
         </div>
     </div>

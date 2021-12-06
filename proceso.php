@@ -42,12 +42,33 @@
 
     <!--BODY-->
 
+    <?php
+
+    include_once("conexion.php");
+
+    $nombrePaciente = $_POST['nombrePaciente'];
+    $edadPaciente = $_POST['edad'];
+    $cedulaPaciente = $_POST['cedula'];
+    $telefonoPaciente = $_POST['telefono'];
+    $correoPaciente = $_POST['correo'];
+    $direccionPaciente = $_POST['direccion'];
+
+    $agregarBDD = "INSERT INTO paciente (nombrePaciente, edad, cedula, telefono, correo, direccion)
+                    VALUES ('$nombrePaciente', '$edadPaciente', '$cedulaPaciente', '$telefonoPaciente', '$correoPaciente',
+                    '$direccionPaciente')";
+
+    $resultado = mysqli_query($conexion, $agregarBDD);
+
+    mysqli_close($conexion);
+
+    ?>
+
     <div class="fondo-section">
         <div class="container section black-text">
 
             <div class="section">
 
-                <h5>Subir y enviar resultados al paciente: </h5>
+                <h5>Examen a realizarle al paciente: </h5>
 
             </div>
 
@@ -57,38 +78,22 @@
     </div>
 
     <div class="container">
+
         <div class="row">
-            <form class="col s12" action="agregandoResultados.php" method="post">
-                <div class="input-field col s4">
-                    <select name="nombrePaciente">
-                        <option disabled selected>Seleccione un paciente</option>
+            <div class="input-field col s4">
+                <ul id="dropdown2" class="dropdown-content">
 
-                        <?php
+                <?php
 
-                        include_once("conexion.php");
+                    echo '<li><a href="HC.php?nombre=' . $nombrePaciente .'">Hematología completa</a></li>
+                            <li><a href="EH.php?nombre=' . $nombrePaciente .'">Examen de heces</a></li>
+                            <li><a href="EO.php?nombre=' . $nombrePaciente .'">Examen de orina</a></li>';
 
-                        $mostrar = "SELECT * FROM paciente";
-                        $consulta = mysqli_query($conexion, $mostrar);
+                ?>
 
-                        while ($obtenerID = mysqli_fetch_array($consulta)) {
-                            echo '<option>' . $obtenerID['nombrePaciente'] . '</option>';
-                        }
-                        
-                        mysqli_close($conexion);
-
-                        ?>
-
-                    </select>
-                    
-                    <label>Seleccione un paciente</label>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s6">
-                        <button class="btn waves-effect waves-light pink lighten-2" type="submit" name="action" value="si">Agregar resultados</button>
-                    </div>
-                </div>
-            </form>
+                </ul>
+                <a class="btn dropdown-trigger pink lighten-2" href="#!" data-target="dropdown2">Examen a realizar<i class="material-icons right">arrow_drop_down</i></a>
+            </div>
         </div>
     </div>
 

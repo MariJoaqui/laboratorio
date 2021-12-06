@@ -27,6 +27,7 @@
             <ul class="right hide-on-med-and-down">
                 <li><a href="index.php">Inicio</a></li>
                 <li><a href="examenes.php">Examenes</a></li>
+                <li><a href="pacientes.php">pacientes</a></li>
                 <li><a href="resultados.php">Resultados</a></li>
             </ul>
         </div>
@@ -35,6 +36,7 @@
     <ul class="sidenav" id="menu-responsive">
         <li><a href="index.php">Inicio</a></li>
         <li><a href="examenes.php">Examenes</a></li>
+        <li><a href="pacientes.php">pacientes</a></li>
         <li><a href="resultados.php">Resultados</a></li>
     </ul>
 

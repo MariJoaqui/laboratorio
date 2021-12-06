@@ -27,7 +27,7 @@
             <ul class="right hide-on-med-and-down">
                 <li><a href="index.php">Inicio</a></li>
                 <li><a href="examenes.php">Examenes</a></li>
-                <li><a href="pacientes.php">pacientes</a></li>
+                <li><a href="pacientes.php">Pacientes</a></li>
                 <li><a href="resultados.php">Resultados</a></li>
             </ul>
         </div>
@@ -45,50 +45,47 @@
     <div class="fondo-section">
         <div class="container section black-text">
 
+            <div class="divider"></div>
+
             <div class="section">
+                
+                <h5>Pacientes: </h5>
 
-                <h5>Subir y enviar resultados al paciente: </h5>
+                <?php
 
+                include_once("conexion.php");
+
+                $mostrar = "SELECT * FROM paciente"; 
+                $consulta = mysqli_query($conexion, $mostrar);
+
+                echo '<div class="row pink lighten-2">
+                            <div class="col s12 m4 l2"><p>Paciente</p></div>
+                            <div class="col s12 m4 l1"><p>Edad</p></div>
+                            <div class="col s12 m4 l2"><p>Teléfono</p></div>
+                            <div class="col s12 m4 l4"><p>Correo</p></div>
+                            <div class="col s12 m4 l1"><p>Eliminar</p></div>
+                        </div>';
+                    
+                    while ($obtener = mysqli_fetch_array($consulta)) {
+                        
+                        echo '<div class="row pink lighten-4">
+                                <div class="col s12 m4 l2"><p>' . $obtener['nombrePaciente'] . '</p></div>
+                                <div class="col s12 m4 l1"><p>' . $obtener['edad'] . '</p></div>
+                                <div class="col s12 m4 l2"><p>' . $obtener['telefono'] . '</p></div>
+                                <div class="col s12 m4 l4"><p>' . $obtener['correo'] . '</p></div>
+                                <div class="col s12 m4 l1">
+                                    <a href="eliminar.php?nombre=' . $obtener['nombrePaciente'] . '" class="waves-effect waves-light btn pink lighten-2">Eliminar</a>
+                                </div>
+                            </div>';
+                    }
+
+                mysqli_close($conexion);
+                ?>
+                          
             </div>
 
             <div class="divider"></div>
 
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <form class="col s12" action="agregandoResultados.php" method="post">
-                <div class="input-field col s4">
-                    <select name="nombrePaciente">
-                        <option disabled selected>Seleccione un paciente</option>
-
-                        <?php
-
-                        include_once("conexion.php");
-
-                        $mostrar = "SELECT * FROM paciente";
-                        $consulta = mysqli_query($conexion, $mostrar);
-
-                        while ($obtenerID = mysqli_fetch_array($consulta)) {
-                            echo '<option>' . $obtenerID['nombrePaciente'] . '</option>';
-                        }
-                        
-                        mysqli_close($conexion);
-
-                        ?>
-
-                    </select>
-                    
-                    <label>Seleccione un paciente</label>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s6">
-                        <button class="btn waves-effect waves-light pink lighten-2" type="submit" name="action" value="si">Agregar resultados</button>
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
 
