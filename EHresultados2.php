@@ -72,7 +72,6 @@
                             <h5>Número de teléfono: ' . $obtener['telefono'] . '</h5>
                             <h5>Correo electrónico: ' . $obtener['correo'] . '</h5>
                             <h5>Dirección: ' . $obtener['direccion'] . '</h5>
-                            <h5>Tipo de examen: ' . $obtener['tipo_examen'] . '</h5>
     
                         </div';
                 }
@@ -91,62 +90,46 @@
 
             <div class="section">
 
-                <h5>Datos del paciente</h5>
+                <h5>Resultados: </h5>
 
             </div>
 
-            
         </div>
     </div>
 
-
     <div class="container">
         <div class="row">
-            <form class="col s12" action="proceso.php" method="post">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="input_text" type="text" data-length="10" name="nombrePaciente" required>
-                        <label class="pink-text text-lighten-2" for="input_text">Nombre y apellido:</label>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="input_text" type="text" data-length="10" name="edad" required>
-                        <label class="pink-text text-lighten-2" for="input_text">Edad:</label>
-                    </div>
-                </div>
+            <?php
 
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="input_text" type="text" data-length="10" name="cedula" required>
-                        <label class="pink-text text-lighten-2" for="input_text">Cédula:</label>
-                    </div>
-                </div>
+            echo '<form class="col s12" action="EHguardar.php?nombre='. $nombre .'" method="post">';
 
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="input_text" type="text" data-length="10" name="telefono" required>
-                        <label class="pink-text text-lighten-2" for="input_text">Número de teléfono:</label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="input_text" type="email" data-length="10" name="correo" required>
-                        <label class="pink-text text-lighten-2" for="input_text">Correo electrónico:</label>
-                    </div>
-                </div>
-
+            ?>
+                
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea id="textarea2" class="materialize-textarea" data-length="120" name="direccion"></textarea>
-                        <label class="pink-text text-lighten-2" for="textarea2">Dirección de habitación</label>
+                        <textarea id="textarea2" class="materialize-textarea" data-length="120" name="resultadoHeces"></textarea>
+                        <label class="pink-text text-lighten-2" for="textarea2">Análisis de las heces</label>
+                        <?php echo "Descripción de la observación y análisis de las heces"; ?>
                     </div>
                 </div>
                 
-                <button class="btn waves-effect waves-light pink lighten-2" type="submit" name="action" value="si">Procesar solicitud</button>
+                <button class="btn waves-effect waves-light pink lighten-2" type="submit" name="action" value="si">Guardar</button>
             </form>
+        </div>
+    </div>
+
+    <div class="fondo-section">
+        <div class="container section black-text">
+
+            <div class="divider"></div>
+
+            <div class="section">
+
+                <p>Al guardar se envía automaticamente un informa PDF al correo registrado del paciente.</p>
+
+            </div>
+
         </div>
     </div>
 

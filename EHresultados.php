@@ -57,23 +57,38 @@
     </div>
 
     <div class="container">
-
         <div class="row">
-            <div class="input-field col s4">
-                <ul id="dropdown2" class="dropdown-content">
+            <form class="col s12" action="EHresultados2.php" method="post">
+                <div class="input-field col s4">
+                    <select name="nombrePaciente">
+                        <option disabled selected>Seleccione un paciente</option>
 
-                <?php
+                        <?php
 
-                    echo '<li><a href="HCresultados.php">Hematología completa</a></li>
-                            <li><a href="EHresultados.php">Examen de heces</a></li>
-                            <li><a href="EOresultados.php">Examen de orina</a></li>';
+                        include_once("conexion.php");
 
-                ?>
+                        $mostrar = "SELECT * FROM examenesheces";
+                        $consulta = mysqli_query($conexion, $mostrar);
 
-                </ul>
+                        while ($obtenerID = mysqli_fetch_array($consulta)) {
+                            echo '<option>' . $obtenerID['nombrePaciente'] . '</option>';
+                        }
 
-                <a class="btn dropdown-trigger pink lighten-2" href="#!" data-target="dropdown2">Examen realizado<i class="material-icons right">arrow_drop_down</i></a>
-            </div>
+                        mysqli_close($conexion);
+
+                        ?>
+
+                    </select>
+
+                    <label>Seleccione un paciente</label>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <button class="btn waves-effect waves-light pink lighten-2" type="submit" name="action" value="si">Agregar resultados</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
