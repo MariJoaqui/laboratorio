@@ -40,6 +40,8 @@ $resultadox = mysqli_query($conexion, $consultax);
 
 $mostrar = "SELECT * FROM paciente WHERE nombrePaciente='$nombre'"; 
 $consultar = mysqli_query($conexion, $mostrar);
+
+ob_start();
         
 while ($obtener = mysqli_fetch_array($consultar)) {
             
@@ -55,58 +57,58 @@ while ($obtener = mysqli_fetch_array($consultar)) {
 
     echo '<h5>Resultados</h5>';
 
-while ($obtenerTodo = mysqli_fetch_array($resultadox)) { 
+    while ($obtenerTodo = mysqli_fetch_array($resultadox)) { 
 
-    echo '<table>
-            <tbody>
-                <tr>
-                    <td>Densidad relativa</td>
-                    <td>' . $obtenerTodo['densidad_relativa'] .'</td>
-                    <td>1023-1035 g/ml</td>
-                </tr>
-                <tr>
-                    <td>Proteína</td>
-                    <td>' . $obtenerTodo['proteína'] .'</td>
-                    <td>Presente-Ausente</td>
-                </tr>
-                <tr>
-                    <td>Glucosa</td>
-                    <td>' . $obtenerTodo['glucosa'] .'</td>
-                    <td>Presente-Ausente</td>
-                </tr>
-                <tr>
-                    <td>Bilirrubina</td>
-                    <td>' . $obtenerTodo['bilirrubina'] .'</td>
-                    <td>Presente-Ausente</td>
-                </tr>
-                <tr>
-                    <td>Urubilinogeno</td>
-                    <td>' . $obtenerTodo['urubilinogeno'] .'</td>
-                    <td>1 mg/dl</td>
-                </tr>
-                <tr>
-                    <td>Eritrocitos</td>
-                    <td>' . $obtenerTodo['eritrocitos'] .'</td>
-                    <td>Presente-Ausente</td>
-                </tr>
-                <tr>
-                    <td>Nitritos</td>
-                    <td>' . $obtenerTodo['nitritos'] .'</td>
-                    <td>Presente-Ausente</td>
-                </tr>
-                <tr>
-                    <td>Leucocitos</td>
-                    <td>' . $obtenerTodo['leucocitos'] .'</td>
-                    <td>5 pc</td>
-                </tr>
-                <tr>
-                    <td>Bacterias</td>
-                    <td>' . $obtenerTodo['bacterias'] .'</td>
-                    <td>Presente-Ausente</td>
-                </tr>
-            </tbody>
-        </table>';
-}
+        echo '<table>
+                <tbody>
+                    <tr>
+                        <td>Densidad relativa</td>
+                        <td>' . $obtenerTodo['densidad_relativa'] .'</td>
+                        <td>1023-1035 g/ml</td>
+                    </tr>
+                    <tr>
+                        <td>Proteína</td>
+                        <td>' . $obtenerTodo['proteína'] .'</td>
+                        <td>Presente-Ausente</td>
+                    </tr>
+                    <tr>
+                        <td>Glucosa</td>
+                        <td>' . $obtenerTodo['glucosa'] .'</td>
+                        <td>Presente-Ausente</td>
+                    </tr>
+                    <tr>
+                        <td>Bilirrubina</td>
+                        <td>' . $obtenerTodo['bilirrubina'] .'</td>
+                        <td>Presente-Ausente</td>
+                    </tr>
+                    <tr>
+                        <td>Urubilinogeno</td>
+                        <td>' . $obtenerTodo['urubilinogeno'] .'</td>
+                        <td>1 mg/dl</td>
+                    </tr>
+                    <tr>
+                        <td>Eritrocitos</td>
+                        <td>' . $obtenerTodo['eritrocitos'] .'</td>
+                        <td>Presente-Ausente</td>
+                    </tr>
+                    <tr>
+                        <td>Nitritos</td>
+                        <td>' . $obtenerTodo['nitritos'] .'</td>
+                        <td>Presente-Ausente</td>
+                    </tr>
+                    <tr>
+                        <td>Leucocitos</td>
+                        <td>' . $obtenerTodo['leucocitos'] .'</td>
+                        <td>5 pc</td>
+                    </tr>
+                    <tr>
+                        <td>Bacterias</td>
+                        <td>' . $obtenerTodo['bacterias'] .'</td>
+                        <td>Presente-Ausente</td>
+                    </tr>
+                </tbody>
+            </table>';
+    }
 
     $resultado = mysqli_query($conexion, $agregarBDD);
 
@@ -133,9 +135,11 @@ while ($obtenerTodo = mysqli_fetch_array($resultadox)) {
 
     mysqli_close($conexion);
 
-?>
+    header("Location: index.php");
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    ?>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://kit.fontawesome.com/d6ff169d2d.js" crossorigin="anonymous"></script>
 
     <script>

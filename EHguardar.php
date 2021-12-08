@@ -52,7 +52,30 @@ while ($obtener = mysqli_fetch_array($consultar)) {
         echo '<p>Resultado del análisis: ' . $obtenerTodo['resultado_heces'] . '</p>';
     }
 
+    $html = ob_get_clean();
+
+    $consulta = "SELECT * FROM paciente WHERE nombrePaciente='$nombre'"; //Obtener correo
+    $resultado2 = mysqli_query($conexion, $consulta);
+
+    while ($obtenerEmail = mysqli_fetch_array($resultado2)) {        
+        $email = $obtenerEmail['correo']; // Correo a donde se quiere enviar
+    }
+
+    $consultaa = "SELECT * FROM correo";
+    $resultadoo = mysqli_query($conexion, $consultaa);
+
+    while ($obtenerEmaill = mysqli_fetch_array($resultadoo)) {        
+        $asunto = $obtenerEmaill['asunto'];
+    }
+
+    $header = "From: noreply@example.com";
+    $header.= "Reply-To: noreply@example.com";
+    $header.= "X-Mailer: PHP/" . phpversion();
+    $mail = @mail($email, $asunto, $html, $header);
+
     mysqli_close($conexion);
+
+    header("Location: index.php");
 
     ?>
 
