@@ -34,14 +34,29 @@
     $agregarBDD = "UPDATE exameneshematología SET Globulos_rojos='$HC1', hemoglobina='$HC2', Hematocrito='$HC3',
                     leucocitos_totales='$HC4', neutrofilos_segmentados='$HC5', linfocitos='$HC6',monocitos='$HC7',
                     eosinofilos='$HC9', basofilos='$HC8', plaquetas='$HC10' WHERE nombrePaciente='$nombre'";
-
     $resultado = mysqli_query($conexion, $agregarBDD);
 
     $consultax = "SELECT * FROM exameneshematología WHERE nombrePaciente='$nombre'";
-
     $resultadox = mysqli_query($conexion, $consultax);
 
+    $mostrar = "SELECT * FROM paciente WHERE nombrePaciente='$nombre'"; 
+    $consultar = mysqli_query($conexion, $mostrar);
+
     ob_start();
+        
+    while ($obtener = mysqli_fetch_array($consultar)) {
+            
+        echo '<div class="section">
+                <h5>Nombre: ' . $obtener['nombrePaciente'] . '</h5>
+                <h5>Edad: ' . $obtener['edad'] . '</h5>
+                <h5>Cédula: ' . $obtener['cedula'] . '</h5>
+                <h5>Número de teléfono: ' . $obtener['telefono'] . '</h5>
+                <h5>Correo electrónico: ' . $obtener['correo'] . '</h5>
+                <h5>Dirección: ' . $obtener['direccion'] . '</h5>
+            </div';
+    }
+
+    echo '<h5>Resultados</h5>';
 
     while ($obtenerTodo = mysqli_fetch_array($resultadox)) { 
     
@@ -101,18 +116,32 @@
             </table>';
     }
 
-    $consulta = "SELECT * FROM paciente WHERE nombrePaciente='$nombre'";
+    $html = ob_get_clean();
 
+    $consulta = "SELECT * FROM paciente WHERE nombrePaciente='$nombre'"; //Obtener correo
     $resultado2 = mysqli_query($conexion, $consulta);
 
     while ($obtenerEmail = mysqli_fetch_array($resultado2)) {        
-        $email = $obtenerEmail['correo'];
+        $email = $obtenerEmail['correo']; // Correo a donde se quiere enviar
     }
-        
+
+    $consultaa = "SELECT * FROM correo";
+    $resultadoo = mysqli_query($conexion, $consultaa);
+
+    while ($obtenerEmaill = mysqli_fetch_array($resultadoo)) {        
+        $asunto = $obtenerEmaill['asunto'];
+    }
+
+    $header = "From: noreply@example.com";
+    $header.= "Reply-To: noreply@example.com";
+    $header.= "X-Mailer: PHP/" . phpversion();
+    $mail = @mail($email, $asunto, $html, $header);
+
     mysqli_close($conexion);
 
-    ?>
+    header("Location: index.php");
 
+    ?>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://kit.fontawesome.com/d6ff169d2d.js" crossorigin="anonymous"></script>
@@ -139,23 +168,3 @@
     </script>
 </body>
 </html>
-
-<?php
-
-$html = ob_get_clean();
-
-require_once 'libreria/dompdf/autoload.inc.php';
-
-use Dompdf\Dompdf;
-$dompdf = new Dompdf();
-$dompdf->loadHtml('hello world');
-
-$dompdf->setPaper('letter');
-
-// Render the HTML as PDF
-$dompdf->render();
-
-// Output the generated PDF to Browser
-$dompdf->stream("archivo.pdf", array("Attachment" => false));
-
-?>
